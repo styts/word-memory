@@ -8,16 +8,10 @@
         <span class="digit">0</span>
         <span class="digit">{{ timerValue }}</span>
       </div>
-      <div class="sound-icon" v-if="gameState === 'play' || gameState === 'end'">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-      </div>
     </div>
 
     <div class="main-content">
-      <div v-if="gameState === 'memorize'" class="status-banner">
+      <div v-if="gameState === 'start' || gameState === 'memorize'" class="status-banner">
         <span>Memorize the words below</span>
       </div>
 
@@ -47,7 +41,7 @@
         </div>
       </div>
       
-      <button v-if="gameState === 'end'" class="try-again-btn" @click="prepareGame">
+      <button v-if="gameState === 'end'" class="try-again-btn" @click="resetAndPlay">
         TRY AGAIN
       </button>
 
@@ -101,6 +95,11 @@ function prepareGame() {
   if (countdownInterval) clearInterval(countdownInterval)
 }
 
+function resetAndPlay() {
+  prepareGame()
+  startGame()
+}
+
 function startGame() {
   gameState.value = 'memorize'
   timerValue.value = 5
@@ -138,6 +137,9 @@ function endGame(win) {
 function getWordClass(word) {
   if (clickedWords.value.has(word)) {
     return targetWords.value.includes(word) ? 'correct' : 'wrong'
+  }
+  if (gameState.value === 'end' && targetWords.value.includes(word)) {
+    return 'revealed-correct'
   }
   return ''
 }
@@ -305,6 +307,12 @@ body {
 .wrong {
   background-color: #eb6068;
   color: white;
+}
+
+.revealed-correct {
+  background-color: rgba(91, 192, 138, 0.8);
+  color: white;
+  transition: background-color 2s ease, color 2s ease;
 }
 
 .try-again-btn {
