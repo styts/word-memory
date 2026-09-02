@@ -10,7 +10,7 @@
             id="memorizeSeconds" 
             type="number" 
             min="1" 
-            max="30" 
+            max="60" 
             v-model.number="memorizeSeconds"
           />
           <span class="unit">sec</span>
@@ -23,9 +23,25 @@
           <input 
             id="targetWordsCount" 
             type="number" 
-            min="2" 
-            max="8" 
+            min="1" 
+            max="20" 
             v-model.number="targetWordsCount"
+            @change="onTargetWordsChange"
+          />
+          <span class="unit">words</span>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <label for="totalGridWords">Total Grid Words</label>
+        <div class="setting-input-wrap">
+          <input 
+            id="totalGridWords" 
+            type="number" 
+            :min="targetWordsCount" 
+            max="64" 
+            v-model.number="totalGridWords"
+            @change="onTotalWordsChange"
           />
           <span class="unit">words</span>
         </div>
@@ -43,7 +59,20 @@ import { useGameSettings } from '../composables/useGameSettings'
 
 defineEmits(['close'])
 
-const { memorizeSeconds, targetWordsCount } = useGameSettings()
+const { memorizeSeconds, targetWordsCount, totalGridWords } = useGameSettings()
+
+function onTargetWordsChange() {
+  if (targetWordsCount.value < 1) targetWordsCount.value = 1
+  if (totalGridWords.value < targetWordsCount.value) {
+    totalGridWords.value = targetWordsCount.value
+  }
+}
+
+function onTotalWordsChange() {
+  if (totalGridWords.value < targetWordsCount.value) {
+    totalGridWords.value = targetWordsCount.value
+  }
+}
 </script>
 
 <style scoped>

@@ -33,8 +33,20 @@ pnpm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## 🧪 Testing & Videos
+
+End-to-end tests are implemented using **Playwright**.
+
+```bash
+# Run Playwright tests and record videos
+pnpm test
+```
+
+Recorded test execution videos are available in [videos.md](videos.md).
+
 ## 🛠️ Built With
 
 - **Nuxt 4**
 - **Vue 3** (Composition API)
+- **Playwright** (End-to-end Testing)
 - Vanilla CSS

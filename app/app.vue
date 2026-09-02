@@ -18,13 +18,15 @@
     </div>
 
     <div class="main-content">
-      <div v-if="gameState === 'start' || gameState === 'memorize'" class="status-banner">
-        <span>Memorize the words below</span>
-      </div>
+      <div class="top-slot">
+        <div v-if="gameState === 'start' || gameState === 'memorize'" class="status-banner">
+          <span>Memorize the words below</span>
+        </div>
 
-      <div v-if="gameState === 'end'" class="status-banner end-banner">
-        <span class="score-text">Score: <span class="score-number">{{score}} / {{targetWords.length}}</span></span>
-        <span class="result-text">{{resultMessage}}</span>
+        <div v-if="gameState === 'end'" class="status-banner end-banner">
+          <span class="score-text">Score: <span class="score-number">{{score}} / {{targetWords.length}}</span></span>
+          <span class="result-text">{{resultMessage}}</span>
+        </div>
       </div>
 
       <div class="card" :class="{'play-mode': gameState === 'play' || gameState === 'end'}">
@@ -47,13 +49,16 @@
           </div>
         </div>
       </div>
-      <button v-if="gameState === 'end'" class="try-again-btn" @click="resetAndPlay">
-        TRY AGAIN
-      </button>
 
-      <button v-if="gameState === 'start'" class="play-btn" @click="startGame">
-        PLAY
-      </button>
+      <div class="bottom-slot">
+        <button v-if="gameState === 'end'" class="try-again-btn" @click="resetAndPlay">
+          PLAY
+        </button>
+
+        <button v-if="gameState === 'start'" class="play-btn" @click="startGame">
+          PLAY
+        </button>
+      </div>
     </div>
 
     <Settings v-if="showSettings" @close="onCloseSettings" />
@@ -67,7 +72,7 @@ import Settings from './components/Settings.vue'
 
 import wordPool from './words.json'
 
-const { memorizeSeconds, targetWordsCount } = useGameSettings()
+const { memorizeSeconds, targetWordsCount, totalGridWords } = useGameSettings()
 const showSettings = ref(false)
 
 const gameState = ref('start')
@@ -90,9 +95,11 @@ function shuffle(array) {
 
 function prepareGame() {
   const count = targetWordsCount.value || 4
+  const total = Math.max(totalGridWords.value || 12, count)
   const shuffledPool = shuffle(wordPool)
   targetWords.value = shuffledPool.slice(0, count)
-  const distractors = shuffledPool.slice(count, count + 8)
+  const distractorCount = total - count
+  const distractors = shuffledPool.slice(count, count + distractorCount)
   shuffledPlayWords.value = shuffle([...targetWords.value, ...distractors])
   
   clickedWords.value = new Set()
@@ -178,20 +185,41 @@ body {
 
 .game-container {
   min-height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  justify-content: center;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
+@media (min-width: 600px) {
+  .game-container {
+    padding: 2rem;
+  }
+}
+
 .header {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   max-width: 800px;
+  padding: 0 1rem;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+@media (min-width: 600px) {
+  .header {
+    top: 2rem;
+    padding: 0 2rem;
+  }
 }
 
 .timer {
@@ -240,16 +268,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 600px;
-  margin-top: 2rem;
+  margin: 0 auto;
+}
+
+.top-slot {
+  min-height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.bottom-slot {
+  min-height: 75px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
 .status-banner {
   background-color: #347458;
   padding: 1rem 1.5rem;
   border-radius: 4px;
-  margin-bottom: 3rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   color: white;
   font-size: 1.2rem;
@@ -257,7 +303,6 @@ body {
 }
 
 .play-btn {
-  margin-top: 3rem;
   background-color: #fb9c4a;
   color: white;
   border: none;
@@ -287,11 +332,19 @@ body {
 
 .card {
   background: white;
-  border-radius: 4px;
-  padding: 2.5rem 2rem;
+  border-radius: 6px;
+  padding: 1.25rem 0.75rem;
   box-shadow: 0 15px 35px rgba(0,0,0,0.25);
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (min-width: 600px) {
+  .card {
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+  }
 }
 
 .memorize-grid {
@@ -303,20 +356,35 @@ body {
 
 .play-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+@media (min-width: 600px) {
+  .play-grid {
+    gap: 0.75rem;
+  }
 }
 
 .word-item {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: clamp(0.7rem, 3.2vw, 1.1rem);
   font-weight: bold;
-  padding: 1.2rem 0.5rem;
+  padding: 0.8rem 0.2rem;
   border-radius: 4px;
   user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 600px) {
+  .word-item {
+    padding: 1.2rem 0.5rem;
+  }
 }
 
 .play-word {
@@ -341,7 +409,6 @@ body {
 }
 
 .try-again-btn {
-  margin-top: 3rem;
   background-color: #fb9c4a;
   color: white;
   border: none;

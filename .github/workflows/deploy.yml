@@ -36,8 +36,27 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Playwright Tests
+        run: pnpm test
+
+      - name: Upload Playwright Test Videos Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-videos
+          path: app/tests/videos/
+          retention-days: 30
+
       - name: Generate static site
         run: pnpm run generate
+
+      - name: Copy videos to static site output
+        run: |
+          mkdir -p .output/public/app/tests/videos
+          cp -r app/tests/videos/* .output/public/app/tests/videos/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

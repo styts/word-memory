@@ -4,3 +4,7 @@ node_modules
 .output
 .env
 dist
+
+# Playwright execution artifacts (keep main .webm videos in git so README/videos.md work)
+app/tests/videos/*/
+app/tests/videos/.last-run.json
