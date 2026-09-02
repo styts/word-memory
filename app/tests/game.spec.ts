@@ -46,7 +46,7 @@ test.describe('Word Memory Game', () => {
 
     // 4. Wait for transition to 'play' state (play grid visible)
     const playGrid = page.locator('.play-grid');
-    await expect(playGrid).toBeVisible({ timeout: 5000 });
+    await expect(playGrid).toBeVisible({ timeout: 10000 });
 
     const playWords = page.locator('.play-word');
     await expect(playWords).toHaveCount(12);

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
 
 const videosDir = path.resolve('app/tests/videos');
 
@@ -19,8 +20,18 @@ if (fs.existsSync(videosDir)) {
           cleanName = 'game_settings';
         }
         
-        fs.copyFileSync(videoFile, path.join(videosDir, `${cleanName}.webm`));
-        console.log(`Copied ${videoFile} -> ${path.join(videosDir, `${cleanName}.webm`)}`);
+        const webmPath = path.join(videosDir, `${cleanName}.webm`);
+        const gifPath = path.join(videosDir, `${cleanName}.gif`);
+        
+        fs.copyFileSync(videoFile, webmPath);
+        console.log(`Copied ${videoFile} -> ${webmPath}`);
+
+        try {
+          execSync(`ffmpeg -y -i "${webmPath}" -vf "fps=15,scale=600:-1:flags=lanczos" "${gifPath}"`, { stdio: 'ignore' });
+          console.log(`Converted ${webmPath} -> ${gifPath}`);
+        } catch (e) {
+          console.warn(`ffmpeg conversion skipped/failed for ${cleanName}:`, e.message);
+        }
       }
     }
   }

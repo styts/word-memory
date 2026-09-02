@@ -5,6 +5,7 @@ node_modules
 .env
 dist
 
-# Playwright execution artifacts (keep main .webm videos in git so README/videos.md work)
+# Playwright execution artifacts & raw webm videos (keep .gif animations tracked for README/videos.md)
+*.webm
 app/tests/videos/*/
 app/tests/videos/.last-run.json
