@@ -8,6 +8,13 @@
         <span class="digit">0</span>
         <span class="digit">{{ timerValue }}</span>
       </div>
+
+      <button class="settings-btn" @click="showSettings = true" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
     </div>
 
     <div class="main-content">
@@ -40,7 +47,6 @@
           </div>
         </div>
       </div>
-      
       <button v-if="gameState === 'end'" class="try-again-btn" @click="resetAndPlay">
         TRY AGAIN
       </button>
@@ -49,19 +55,20 @@
         PLAY
       </button>
     </div>
+
+    <Settings v-if="showSettings" @close="onCloseSettings" />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useGameSettings } from './composables/useGameSettings'
+import Settings from './components/Settings.vue'
 
-const wordPool = [
-  'flower', 'dolphin', 'cab', 'coat', 'dune', 'fish', 'always', 'fork', 
-  'complex', 'cave', 'orange', 'phone', 'table', 'chair', 'apple', 'banana'
-]
+import wordPool from './words.json'
 
-const MAX_SELECTIONS = 4
-
+const { memorizeSeconds, targetWordsCount } = useGameSettings()
+const showSettings = ref(false)
 
 const gameState = ref('start')
 const targetWords = ref([])
@@ -69,7 +76,7 @@ const shuffledPlayWords = ref([])
 const clickedWords = ref(new Set())
 const score = ref(0)
 const resultMessage = ref('')
-const timerValue = ref(5)
+const timerValue = ref(memorizeSeconds.value || 5)
 let countdownInterval = null
 
 function shuffle(array) {
@@ -82,15 +89,16 @@ function shuffle(array) {
 }
 
 function prepareGame() {
+  const count = targetWordsCount.value || 4
   const shuffledPool = shuffle(wordPool)
-  targetWords.value = shuffledPool.slice(0, MAX_SELECTIONS)
-  const distractors = shuffledPool.slice(4, 12)
+  targetWords.value = shuffledPool.slice(0, count)
+  const distractors = shuffledPool.slice(count, count + 8)
   shuffledPlayWords.value = shuffle([...targetWords.value, ...distractors])
   
   clickedWords.value = new Set()
   score.value = 0
   gameState.value = 'start'
-  timerValue.value = 5
+  timerValue.value = memorizeSeconds.value || 5
   
   if (countdownInterval) clearInterval(countdownInterval)
 }
@@ -102,7 +110,7 @@ function resetAndPlay() {
 
 function startGame() {
   gameState.value = 'memorize'
-  timerValue.value = 5
+  timerValue.value = memorizeSeconds.value || 5
   
   if (countdownInterval) clearInterval(countdownInterval)
   countdownInterval = setInterval(() => {
@@ -124,8 +132,9 @@ function clickWord(word) {
     score.value++
   }
 
-  if (clickedWords.value.size >= MAX_SELECTIONS) {
-    endGame(score.value === MAX_SELECTIONS)
+  const maxPicks = targetWordsCount.value || 4
+  if (clickedWords.value.size >= maxPicks) {
+    endGame(score.value === maxPicks)
   }
 }
 
@@ -142,6 +151,13 @@ function getWordClass(word) {
     return 'revealed-correct'
   }
   return ''
+}
+
+function onCloseSettings() {
+  showSettings.value = false
+  if (gameState.value === 'start') {
+    prepareGame()
+  }
 }
 
 onMounted(() => {
@@ -174,6 +190,7 @@ body {
   max-width: 800px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
 }
 
@@ -197,7 +214,7 @@ body {
   font-weight: bold;
 }
 
-.sound-icon {
+.settings-btn {
   width: 48px;
   height: 48px;
   background-color: #434343;
@@ -206,8 +223,15 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.1s;
 }
-.sound-icon svg {
+.settings-btn:active {
+  transform: scale(0.95);
+}
+.settings-btn svg {
   width: 24px;
   height: 24px;
 }
@@ -274,6 +298,7 @@ body {
   display: flex;
   justify-content: space-around;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .play-grid {
