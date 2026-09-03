@@ -1,0 +1,20 @@
+// Prisma schema file for Word Memory Backend
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PlayResult {
+  id          String   @id @default(cuid())
+  score       Int
+  targetCount Int
+  percent     Int
+  timestamp   BigInt?
+  metadata    Json?    // Flexible JSON field to store details like correct/wrong words, settings, etc.
+  createdAt   DateTime @default(now())
+}

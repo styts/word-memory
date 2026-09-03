@@ -2,6 +2,11 @@ export default defineNuxtConfig({
   modules: ['@vite-pwa/nuxt'],
   devtools: { enabled: false },
   compatibilityDate: '2024-04-03',
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://htz.styts.com/word-memory-api'
+    }
+  },
   future: {
     compatibilityVersion: 4,
   },

@@ -117,6 +117,7 @@ const gameState = ref('start')
 const targetWords = ref([])
 const shuffledPlayWords = ref([])
 const clickedWords = ref(new Set())
+const clickTimings = ref([])
 const score = ref(0)
 const resultMessage = ref('')
 const timerValue = ref(memorizeSeconds.value || 5)
@@ -124,6 +125,7 @@ const playTimeRemaining = ref(0)
 const playProgressPercent = ref(100)
 let countdownInterval = null
 let playInterval = null
+let playStartTime = 0
 
 function getWordText(item) {
   if (!item) return ''
@@ -173,6 +175,8 @@ function prepareGame() {
   shuffledPlayWords.value = shuffle([...targetWords.value, ...distractors])
   
   clickedWords.value = new Set()
+  clickTimings.value = []
+  playStartTime = 0
   score.value = 0
   gameState.value = 'start'
   timerValue.value = memorizeSeconds.value || 5
@@ -224,6 +228,8 @@ function startDelayPhase() {
 function startPlayPhase() {
   gameState.value = 'play'
   clearPlayTimer()
+  playStartTime = performance.now()
+  clickTimings.value = []
 
   const pSec = playSeconds.value ?? 15
   if (pSec > 0) {
@@ -253,9 +259,18 @@ function clickWord(word) {
   const key = getWordKey(word)
   if (clickedWords.value.has(key)) return
 
-  clickedWords.value.add(key)
+  const now = performance.now()
+  const delayMs = playStartTime > 0 ? Math.round(now - playStartTime) : 0
+  const isCorrect = isTargetWord(word)
 
-  if (isTargetWord(word)) {
+  clickedWords.value.add(key)
+  clickTimings.value.push({
+    word: key,
+    isCorrect,
+    delayMs
+  })
+
+  if (isCorrect) {
     score.value++
   }
 
@@ -278,7 +293,26 @@ function endGame(win) {
   clearPlayTimer()
   gameState.value = 'end'
   resultMessage.value = win ? 'You won!' : 'You lost!'
-  addPlayRecord(score.value, targetWordsCount.value || 4)
+
+  const clickedKeys = Array.from(clickedWords.value)
+  const targetKeys = targetWords.value.map(getWordKey)
+  const correctWords = clickedKeys.filter(k => targetKeys.includes(k))
+  const wrongWords = clickedKeys.filter(k => !targetKeys.includes(k))
+
+  const clickDelaysMs = {}
+  clickTimings.value.forEach(item => {
+    clickDelaysMs[item.word] = item.delayMs
+  })
+
+  addPlayRecord(score.value, targetWordsCount.value || 4, {
+    language: language.value,
+    correctWords,
+    wrongWords,
+    targetWords: targetKeys,
+    clickDelaysMs,
+    clickSequence: clickTimings.value
+  })
+
   if (win) {
     triggerWinConfetti()
   }
