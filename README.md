@@ -7,11 +7,21 @@ A minimal, sleek **Nuxt 4** web application designed to test and train your word
 1. **Start**: Click the **PLAY** button to begin a round.
 2. **Memorize**: You will be shown a set of words (default: 4) for a brief countdown period (default: 5 seconds).
 3. **Select**: Once the timer hits zero, a grid containing target words and distractors appears. Select the words you memorized!
-4. **Result**: 
+4. **Result**:
    - Correctly selected words turn green instantly.
    - Wrong words turn red instantly.
    - Any missed target words will smoothly fade in over 2 seconds in green (0.8 opacity) when the game ends.
 5. **Replay**: Click **TRY AGAIN** to instantly generate a new set of words and start a new round.
+
+## 🔄 Game States
+
+The application lifecycle flows through five distinct states:
+
+- **`start`** *(Main Menu)*: Initial screen showing masked card placeholders (`?`), settings button, and the start **PLAY** button.
+- **`memorize`**: Target words phase displaying words to memorize (including low-opacity articles in German) alongside a top countdown timer.
+- **`delay`**: Brief intermission countdown (default: 3 seconds) transitioning visual memory into mental recall.
+- **`play`**: Active recall phase displaying the interactive grid and progressor bar.
+- **`end`** *(Finished Stage)*: Displays final score banner, revealed correct/wrong answers, performance trend chart, settings button, and replay **PLAY** button.
 
 ## ⚙️ Settings
 

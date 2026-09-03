@@ -74,7 +74,7 @@ test.describe('Word Memory Game', () => {
 
     // 8. Click PLAY again to restart
     await page.locator('.try-again-btn').click();
-    await expect(page.locator('.status-banner')).toHaveText('Memorize the words below');
+    await expect(page.locator('.timer')).toBeVisible();
   });
 
   test('should open adjust and save game settings including delay and play duration', async ({ page }) => {
