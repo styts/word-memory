@@ -18,6 +18,21 @@
       </div>
 
       <div class="setting-group">
+        <label for="delaySeconds">Delay Duration (seconds)</label>
+        <div class="setting-input-wrap">
+          <input 
+            id="delaySeconds" 
+            type="number" 
+            min="0" 
+            max="60" 
+            v-model.number="delaySeconds"
+            @change="onDelaySecondsChange"
+          />
+          <span class="unit">sec</span>
+        </div>
+      </div>
+
+      <div class="setting-group">
         <label for="targetWordsCount">Words to Memorize</label>
         <div class="setting-input-wrap">
           <input 
@@ -59,7 +74,11 @@ import { useGameSettings } from '../composables/useGameSettings'
 
 defineEmits(['close'])
 
-const { memorizeSeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { memorizeSeconds, delaySeconds, targetWordsCount, totalGridWords } = useGameSettings()
+
+function onDelaySecondsChange() {
+  if (delaySeconds.value < 0) delaySeconds.value = 0
+}
 
 function onTargetWordsChange() {
   if (targetWordsCount.value < 1) targetWordsCount.value = 1

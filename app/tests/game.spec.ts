@@ -24,11 +24,11 @@ test.describe('Word Memory Game', () => {
     await expect(playBtn).toHaveText('PLAY');
   });
 
-  test('should complete full game lifecycle from start to end screen', async ({ page }) => {
-    // 1. Open settings and set memorize duration to 1 sec for fast test execution
+  test('should complete full game lifecycle with delay step from start to end screen', async ({ page }) => {
+    // 1. Open settings and set memorize duration to 1 sec and delay duration to 1 sec for fast test execution
     await page.locator('.settings-btn').click();
-    const durationInput = page.locator('#memorizeSeconds');
-    await durationInput.fill('1');
+    await page.locator('#memorizeSeconds').fill('1');
+    await page.locator('#delaySeconds').fill('1');
     await page.locator('.save-btn').click();
 
     // 2. Click PLAY to start memorizing
@@ -44,35 +44,41 @@ test.describe('Word Memory Game', () => {
     }
     expect(targetWordsText.length).toBe(4);
 
-    // 4. Wait for transition to 'play' state (play grid visible)
+    // 4. Verify transition to delay step
+    const delayContainer = page.locator('.delay-container');
+    await expect(delayContainer).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('.delay-step-badge')).toContainText('Step 1 / 1');
+
+    // 5. Wait for transition to 'play' state (play grid visible)
     const playGrid = page.locator('.play-grid');
     await expect(playGrid).toBeVisible({ timeout: 10000 });
 
     const playWords = page.locator('.play-word');
     await expect(playWords).toHaveCount(12);
 
-    // 5. Click 4 words on grid
+    // 6. Click 4 words on grid
     for (let i = 0; i < 4; i++) {
       await playWords.nth(i).click();
     }
 
-    // 6. Verify transition to 'end' state
+    // 7. Verify transition to 'end' state
     const endBanner = page.locator('.end-banner');
     await expect(endBanner).toBeVisible();
     await expect(page.locator('.try-again-btn')).toBeVisible();
 
-    // 7. Click PLAY again to restart
+    // 8. Click PLAY again to restart
     await page.locator('.try-again-btn').click();
     await expect(page.locator('.status-banner')).toHaveText('Memorize the words below');
   });
 
-  test('should open adjust and save game settings', async ({ page }) => {
+  test('should open adjust and save game settings including delay', async ({ page }) => {
     // Open settings modal
     await page.locator('.settings-btn').click();
     await expect(page.locator('.settings-card h2')).toHaveText('Game Settings');
 
     // Change settings
     await page.locator('#memorizeSeconds').fill('3');
+    await page.locator('#delaySeconds').fill('4');
     await page.locator('#targetWordsCount').fill('5');
     await page.locator('#totalGridWords').fill('15');
 
@@ -87,6 +93,7 @@ test.describe('Word Memory Game', () => {
     expect(storedSettings).not.toBeNull();
     const parsed = JSON.parse(storedSettings!);
     expect(parsed.memorizeSeconds).toBe(3);
+    expect(parsed.delaySeconds).toBe(4);
     expect(parsed.targetWordsCount).toBe(5);
     expect(parsed.totalGridWords).toBe(15);
   });

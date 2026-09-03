@@ -23,6 +23,10 @@
           <span>Memorize the words below</span>
         </div>
 
+        <div v-if="gameState === 'delay'" class="status-banner delay-banner">
+          <span>Hold the words in your memory...</span>
+        </div>
+
         <div v-if="gameState === 'end'" class="status-banner end-banner">
           <span class="score-text">Score: <span class="score-number">{{score}} / {{targetWords.length}}</span></span>
           <span class="result-text">{{resultMessage}}</span>
@@ -35,6 +39,12 @@
             <span v-if="gameState === 'memorize'">{{ word }}</span>
             <span v-else>?</span>
           </div>
+        </div>
+
+        <div v-if="gameState === 'delay'" class="delay-container">
+          <!-- <div class="delay-step-badge">{{ delayStep }} / {{ delaySeconds }}</div> -->
+          <div class="delay-countdown">{{ timerValue }}</div>
+          <!-- <div class="delay-label">Get Ready...</div> -->
         </div>
 
         <div v-if="gameState === 'play' || gameState === 'end'" class="play-grid">
@@ -72,7 +82,7 @@ import Settings from './components/Settings.vue'
 
 import wordPool from './words.json'
 
-const { memorizeSeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { memorizeSeconds, delaySeconds, targetWordsCount, totalGridWords } = useGameSettings()
 const showSettings = ref(false)
 
 const gameState = ref('start')
@@ -82,6 +92,7 @@ const clickedWords = ref(new Set())
 const score = ref(0)
 const resultMessage = ref('')
 const timerValue = ref(memorizeSeconds.value || 5)
+const delayStep = ref(1)
 let countdownInterval = null
 
 function shuffle(array) {
@@ -106,6 +117,7 @@ function prepareGame() {
   score.value = 0
   gameState.value = 'start'
   timerValue.value = memorizeSeconds.value || 5
+  delayStep.value = 1
   
   if (countdownInterval) clearInterval(countdownInterval)
 }
@@ -124,9 +136,30 @@ function startGame() {
     timerValue.value--
     if (timerValue.value <= 0) {
       clearInterval(countdownInterval)
-      gameState.value = 'play'
+      startDelayPhase()
     }
   }, 1000)
+}
+
+function startDelayPhase() {
+  const dSec = delaySeconds.value ?? 3
+  if (dSec > 0) {
+    gameState.value = 'delay'
+    timerValue.value = dSec
+    delayStep.value = 1
+    
+    if (countdownInterval) clearInterval(countdownInterval)
+    countdownInterval = setInterval(() => {
+      timerValue.value--
+      delayStep.value++
+      if (timerValue.value <= 0) {
+        clearInterval(countdownInterval)
+        gameState.value = 'play'
+      }
+    }, 1000)
+  } else {
+    gameState.value = 'play'
+  }
 }
 
 function clickWord(word) {
@@ -300,6 +333,62 @@ body {
   color: white;
   font-size: 1.2rem;
   text-align: center;
+}
+
+.delay-banner {
+  background-color: #386b5d;
+}
+
+.delay-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.delay-step-badge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.delay-countdown {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: #4b9a76;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
+  animation: pulse-countdown 1s ease-in-out infinite;
+}
+
+.delay-label {
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 600;
+}
+
+@keyframes pulse-countdown {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
 }
 
 .play-btn {

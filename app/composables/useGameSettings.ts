@@ -4,6 +4,7 @@ const STORAGE_KEY = 'word_memory_settings'
 
 export const useGameSettings = () => {
   const memorizeSeconds = useState<number>('memorizeSeconds', () => 5)
+  const delaySeconds = useState<number>('delaySeconds', () => 3)
   const targetWordsCount = useState<number>('targetWordsCount', () => 4)
   const totalGridWords = useState<number>('totalGridWords', () => 12)
 
@@ -13,6 +14,7 @@ export const useGameSettings = () => {
       try {
         const parsed = JSON.parse(saved)
         if (typeof parsed.memorizeSeconds === 'number') memorizeSeconds.value = parsed.memorizeSeconds
+        if (typeof parsed.delaySeconds === 'number') delaySeconds.value = parsed.delaySeconds
         if (typeof parsed.targetWordsCount === 'number') targetWordsCount.value = parsed.targetWordsCount
         if (typeof parsed.totalGridWords === 'number') totalGridWords.value = parsed.totalGridWords
       } catch (e) {
@@ -21,12 +23,13 @@ export const useGameSettings = () => {
     }
 
     watch(
-      [memorizeSeconds, targetWordsCount, totalGridWords],
+      [memorizeSeconds, delaySeconds, targetWordsCount, totalGridWords],
       () => {
         localStorage.setItem(
           STORAGE_KEY,
           JSON.stringify({
             memorizeSeconds: memorizeSeconds.value,
+            delaySeconds: delaySeconds.value,
             targetWordsCount: targetWordsCount.value,
             totalGridWords: totalGridWords.value
           })
@@ -38,6 +41,7 @@ export const useGameSettings = () => {
 
   return {
     memorizeSeconds,
+    delaySeconds,
     targetWordsCount,
     totalGridWords
   }
