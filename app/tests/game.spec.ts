@@ -105,4 +105,45 @@ test.describe('Word Memory Game', () => {
     expect(parsed.targetWordsCount).toBe(5);
     expect(parsed.totalGridWords).toBe(15);
   });
+
+  test('should render performance chart and record play history after game completion', async ({ page }) => {
+    // 1. Check chart card on start screen
+    await expect(page.locator('.chart-card')).toBeVisible();
+    await expect(page.locator('.chart-title-group h3')).toHaveText('Last 10 Plays');
+
+    // 2. Play a quick game
+    await page.locator('.settings-btn').click();
+    await page.locator('#memorizeSeconds').fill('1');
+    await page.locator('#delaySeconds').fill('1');
+    await page.locator('.save-btn').click();
+
+    await page.locator('.play-btn').click();
+
+    // Wait for play grid
+    const playGrid = page.locator('.play-grid');
+    await expect(playGrid).toBeVisible({ timeout: 10000 });
+
+    // Click 4 words
+    const playWords = page.locator('.play-word');
+    for (let i = 0; i < 4; i++) {
+      await playWords.nth(i).click();
+    }
+
+    // Wait for end screen
+    await expect(page.locator('.end-banner')).toBeVisible();
+
+    // 3. Verify chart SVG now renders data point dot
+    await expect(page.locator('.chart-svg')).toBeVisible();
+    const dots = page.locator('.chart-dot');
+    await expect(dots).toHaveCount(1);
+
+    // Verify localStorage history item exists
+    const storedHistory = await page.evaluate(() => {
+      return localStorage.getItem('word_memory_history');
+    });
+    expect(storedHistory).not.toBeNull();
+    const historyParsed = JSON.parse(storedHistory!);
+    expect(historyParsed.length).toBe(1);
+    expect(typeof historyParsed[0].percent).toBe('number');
+  });
 });

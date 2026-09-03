@@ -60,4 +60,10 @@ Recorded test execution videos are available in [videos.md](videos.md).
 - [x] add a 🎉 (use it not as emoji, but you can find these in many other apps), when the user gets 'you won'.
 - [x] add another Setting parameter, default 15 seconds, where in the lowest side of the playing state, a progressor comes by.
 - [x] add link in GitHub
-- [ ] add a EChart line-smooth which shows the last 10 plays (y is percent of correct)
+- [x] add a Chart component, with line which shows the last 10 plays (y is percent of correct). should we use a library? or not? which are popular?
+- [ ] Setting language. default: English. alternative: German.
+- [ ] feat: not a fixed column (4-5 words), but the columns should not matter.
+because we might have more or less words,
+and our font might be too small... make the size consistent, but at least 2 words (it's possible on a vertical phone).
+maybe we will not need to have the relevant Setting config (you decide)
+- [ ] Setting customization: color of the background

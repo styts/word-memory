@@ -63,6 +63,8 @@
           PLAY
         </button>
       </div>
+
+      <Chart v-if="gameState === 'start' || gameState === 'end'" />
     </div>
 
     <div v-if="gameState === 'play' && (playSeconds ?? 15) > 0" class="progressor-container">
@@ -75,7 +77,7 @@
     </div>
 
     <a 
-      v-if="gameState === 'start'" 
+      v-if="gameState === 'start' || gameState === 'end'" 
       href="https://github.com/styts/word-memory" 
       target="_blank" 
       rel="noopener noreferrer" 
@@ -95,11 +97,14 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import confetti from 'canvas-confetti'
 import { useGameSettings } from './composables/useGameSettings'
+import { usePlayHistory } from './composables/usePlayHistory'
 import Settings from './components/Settings.vue'
+import Chart from './components/Chart.vue'
 
 import wordPool from './words.json'
 
 const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { addPlayRecord } = usePlayHistory()
 const showSettings = ref(false)
 
 const gameState = ref('start')
@@ -244,6 +249,7 @@ function endGame(win) {
   clearPlayTimer()
   gameState.value = 'end'
   resultMessage.value = win ? 'You won!' : 'You lost!'
+  addPlayRecord(score.value, targetWordsCount.value || 4)
   if (win) {
     triggerWinConfetti()
   }
