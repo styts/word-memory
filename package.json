@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "test": "playwright test && node ./app/tests/organize-videos.js",
+    "test": "pnpm build && playwright test && node ./app/tests/organize-videos.js",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
