@@ -71,6 +71,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import confetti from 'canvas-confetti'
 import { useGameSettings } from './composables/useGameSettings'
 import Settings from './components/Settings.vue'
 
@@ -168,9 +169,21 @@ function clickWord(word) {
   }
 }
 
+function triggerWinConfetti() {
+  if (typeof window === 'undefined') return
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  })
+}
+
 function endGame(win) {
   gameState.value = 'end'
   resultMessage.value = win ? 'You won!' : 'You lost!'
+  if (win) {
+    triggerWinConfetti()
+  }
 }
 
 function getWordClass(word) {
