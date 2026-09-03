@@ -76,3 +76,4 @@ Recorded test execution videos are available in [videos.md](videos.md).
 because we might have more or less words,
 and our font might be too small... make the size consistent, but at least 2 words (it's possible on a vertical phone).
 - [ ] Setting customization: color of the background
+- [ ] ui: language not only words, but the UI itself. use a composable or a library?

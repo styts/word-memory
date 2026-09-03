@@ -77,7 +77,7 @@ test.describe('Word Memory Game', () => {
     await expect(page.locator('.timer')).toBeVisible();
   });
 
-  test('should open adjust and save game settings including delay and play duration', async ({ page }) => {
+  test('should open adjust and save game settings including delay, play duration, and font size', async ({ page }) => {
     // Open settings modal
     await page.locator('.settings-btn').click();
     await expect(page.locator('.settings-card h2')).toHaveText('Game Settings');
@@ -88,10 +88,14 @@ test.describe('Word Memory Game', () => {
     await page.locator('#playSeconds').fill('20');
     await page.locator('#targetWordsCount').fill('5');
     await page.locator('#totalGridWords').fill('15');
+    await page.locator('#fontSize').selectOption('large');
 
     // Save and close
     await page.locator('.save-btn').click();
     await expect(page.locator('.settings-card')).not.toBeVisible();
+
+    // Verify container font class
+    await expect(page.locator('.game-container')).toHaveClass(/font-size-large/);
 
     // Verify localStorage has persisted settings
     const storedSettings = await page.evaluate(() => {
@@ -104,6 +108,7 @@ test.describe('Word Memory Game', () => {
     expect(parsed.playSeconds).toBe(20);
     expect(parsed.targetWordsCount).toBe(5);
     expect(parsed.totalGridWords).toBe(15);
+    expect(parsed.fontSize).toBe('large');
   });
 
   test('should render performance chart and record play history after game completion', async ({ page }) => {

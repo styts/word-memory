@@ -9,6 +9,7 @@ export const useGameSettings = () => {
   const targetWordsCount = useState<number>('targetWordsCount', () => 4)
   const totalGridWords = useState<number>('totalGridWords', () => 12)
   const language = useState<string>('language', () => 'en')
+  const fontSize = useState<string>('fontSize', () => 'medium')
 
   if (import.meta.client) {
     try {
@@ -21,6 +22,7 @@ export const useGameSettings = () => {
         if (typeof parsed.targetWordsCount === 'number') targetWordsCount.value = parsed.targetWordsCount
         if (typeof parsed.totalGridWords === 'number') totalGridWords.value = parsed.totalGridWords
         if (typeof parsed.language === 'string') language.value = parsed.language
+        if (typeof parsed.fontSize === 'string') fontSize.value = parsed.fontSize
       }
     } catch (e) {
       console.warn('Failed to read settings from localStorage:', e)
@@ -28,7 +30,7 @@ export const useGameSettings = () => {
 
     try {
       watch(
-        [memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language],
+        [memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language, fontSize],
         () => {
           try {
             localStorage.setItem(
@@ -39,7 +41,8 @@ export const useGameSettings = () => {
                 playSeconds: playSeconds.value,
                 targetWordsCount: targetWordsCount.value,
                 totalGridWords: totalGridWords.value,
-                language: language.value
+                language: language.value,
+                fontSize: fontSize.value
               })
             )
           } catch (e) {
@@ -57,6 +60,7 @@ export const useGameSettings = () => {
     playSeconds,
     targetWordsCount,
     totalGridWords,
-    language
+    language,
+    fontSize
   }
 }

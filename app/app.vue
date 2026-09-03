@@ -1,5 +1,5 @@
 <template>
-  <div class="game-container">
+  <div class="game-container" :class="`font-size-${fontSize || 'medium'}`">
     <div class="header">
       <div v-if="gameState === 'memorize'" class="timer">
         <span class="digit">0</span>
@@ -109,7 +109,7 @@ import Chart from './components/Chart.vue'
 
 import wordPools from './words/index'
 
-const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language } = useGameSettings()
+const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language, fontSize } = useGameSettings()
 const { addPlayRecord } = usePlayHistory()
 const showSettings = ref(false)
 
@@ -539,7 +539,7 @@ body {
 
 .word-item {
   text-align: center;
-  font-size: clamp(0.8rem, 2.4vw, 1.1rem);
+  font-size: clamp(1.1rem, 2.8vw, 1.35rem);
   font-weight: bold;
   padding: 0.75rem 0.5rem;
   border-radius: 6px;
@@ -550,6 +550,34 @@ body {
   white-space: nowrap;
   min-width: 0;
   box-sizing: border-box;
+}
+
+.font-size-small .word-item {
+  font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+}
+
+.font-size-medium .word-item {
+  font-size: clamp(1.1rem, 2.8vw, 1.35rem);
+}
+
+.font-size-large .word-item {
+  font-size: clamp(1.35rem, 3.4vw, 1.65rem);
+}
+
+.font-size-xlarge .word-item {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+}
+
+.font-size-large .play-grid,
+.font-size-xlarge .play-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(140px, 45%), 1fr));
+}
+
+@media (min-width: 600px) {
+  .font-size-large .play-grid,
+  .font-size-xlarge .play-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
 }
 
 .word-article {

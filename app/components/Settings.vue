@@ -88,6 +88,18 @@
         </div>
       </div>
 
+      <div class="setting-group">
+        <label for="fontSize">Font Size</label>
+        <div class="setting-input-wrap">
+          <select id="fontSize" v-model="fontSize" class="setting-select">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="xlarge">Extra Large</option>
+          </select>
+        </div>
+      </div>
+
       <div class="actions">
         <button class="save-btn" @click="$emit('close')">Save & Close</button>
       </div>
@@ -100,7 +112,7 @@ import { useGameSettings } from '../composables/useGameSettings'
 
 defineEmits(['close'])
 
-const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language } = useGameSettings()
+const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language, fontSize } = useGameSettings()
 
 function onDelaySecondsChange() {
   if (delaySeconds.value < 0) delaySeconds.value = 0
