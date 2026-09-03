@@ -31,8 +31,11 @@
 
       <div class="card" :class="{'play-mode': gameState === 'play' || gameState === 'end'}">
         <div v-if="gameState === 'start' || gameState === 'memorize'" class="memorize-grid">
-          <div v-for="word in targetWords" :key="word" class="word-item memorize-word">
-            <span v-if="gameState === 'memorize'">{{ word }}</span>
+          <div v-for="word in targetWords" :key="getWordKey(word)" class="word-item memorize-word">
+            <span v-if="gameState === 'memorize'">
+              <span v-if="getWordArticle(word)" class="word-article">{{ getWordArticle(word) }}</span>
+              <span class="word-text">{{ getWordText(word) }}</span>
+            </span>
             <span v-else>?</span>
           </div>
         </div>
@@ -44,12 +47,13 @@
         <div v-if="gameState === 'play' || gameState === 'end'" class="play-grid">
           <div 
             v-for="word in shuffledPlayWords" 
-            :key="word" 
+            :key="getWordKey(word)" 
             class="word-item play-word"
             :class="getWordClass(word)"
             @click="clickWord(word)"
           >
-            {{ word }}
+            <span v-if="getWordArticle(word)" class="word-article">{{ getWordArticle(word) }}</span>
+            <span class="word-text">{{ getWordText(word) }}</span>
           </div>
         </div>
       </div>
@@ -101,9 +105,9 @@ import { usePlayHistory } from './composables/usePlayHistory'
 import Settings from './components/Settings.vue'
 import Chart from './components/Chart.vue'
 
-import wordPool from './words.json'
+import wordPools from './words/index'
 
-const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language } = useGameSettings()
 const { addPlayRecord } = usePlayHistory()
 const showSettings = ref(false)
 
@@ -118,6 +122,27 @@ const playTimeRemaining = ref(0)
 const playProgressPercent = ref(100)
 let countdownInterval = null
 let playInterval = null
+
+function getWordText(item) {
+  if (!item) return ''
+  return typeof item === 'string' ? item : item.word
+}
+
+function getWordArticle(item) {
+  if (!item || typeof item === 'string') return null
+  return item.article || null
+}
+
+function getWordKey(item) {
+  if (!item) return ''
+  if (typeof item === 'string') return item
+  return `${item.article || ''}_${item.word}`
+}
+
+function isTargetWord(word) {
+  const key = getWordKey(word)
+  return targetWords.value.some(t => getWordKey(t) === key)
+}
 
 function clearPlayTimer() {
   if (playInterval) {
@@ -138,7 +163,8 @@ function shuffle(array) {
 function prepareGame() {
   const count = targetWordsCount.value || 4
   const total = Math.max(totalGridWords.value || 12, count)
-  const shuffledPool = shuffle(wordPool)
+  const currentPool = wordPools[language.value] || wordPools.en || []
+  const shuffledPool = shuffle(currentPool)
   targetWords.value = shuffledPool.slice(0, count)
   const distractorCount = total - count
   const distractors = shuffledPool.slice(count, count + distractorCount)
@@ -222,11 +248,12 @@ function startPlayPhase() {
 
 function clickWord(word) {
   if (gameState.value !== 'play') return
-  if (clickedWords.value.has(word)) return
+  const key = getWordKey(word)
+  if (clickedWords.value.has(key)) return
 
-  clickedWords.value.add(word)
+  clickedWords.value.add(key)
 
-  if (targetWords.value.includes(word)) {
+  if (isTargetWord(word)) {
     score.value++
   }
 
@@ -256,10 +283,11 @@ function endGame(win) {
 }
 
 function getWordClass(word) {
-  if (clickedWords.value.has(word)) {
-    return targetWords.value.includes(word) ? 'correct' : 'wrong'
+  const key = getWordKey(word)
+  if (clickedWords.value.has(key)) {
+    return isTargetWord(word) ? 'correct' : 'wrong'
   }
-  if (gameState.value === 'end' && targetWords.value.includes(word)) {
+  if (gameState.value === 'end' && isTargetWord(word)) {
     return 'revealed-correct'
   }
   return ''
@@ -519,6 +547,12 @@ body {
   min-width: 0;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+.word-article {
+  opacity: 0.55;
+  margin-right: 0.25rem;
+  font-weight: 500;
 }
 
 @media (min-width: 600px) {

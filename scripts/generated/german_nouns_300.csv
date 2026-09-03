@@ -1,0 +1,462 @@
+﻿Category,German,English,Plural
+People,der Mann,man,die Männer
+People,die Frau,woman,die Frauen
+People,das Kind,child,die Kinder
+People,der Junge,boy,die Jungen
+People,das Mädchen,girl,die Mädchen
+People,der Vater,father,die Väter
+People,die Mutter,mother,die Mütter
+People,der Sohn,son,die Söhne
+People,die Tochter,daughter,die Töchter
+People,der Bruder,brother,die Brüder
+People,die Schwester,sister,die Schwestern
+People,der Freund,friend (male),die Freunde
+People,die Freundin,friend (female),die Freundinnen
+People,der Kollege,colleague (male),die Kollegen
+People,die Kollegin,colleague (female),die Kolleginnen
+People,der Chef,boss (male),die Chefs
+People,die Chefin,boss (female),die Chefinnen
+People,der Lehrer,teacher (male),die Lehrer
+People,die Lehrerin,teacher (female),die Lehrerinnen
+People,der Schüler,student/pupil (male),die Schüler
+People,die Schülerin,student/pupil (female),die Schülerinnen
+People,der Arzt,doctor (male),die Ärzte
+People,die Ärztin,doctor (female),die Ärztinnen
+People,der Kunde,customer (male),die Kunden
+People,die Kundin,customer (female),die Kundinnen
+People,der Nachbar,neighbor (male),die Nachbarn
+People,die Nachbarin,neighbor (female),die Nachbarinnen
+People,der Mensch,human / person,die Menschen
+People,die Leute,people,--- (only plural)
+People,die Familie,family,die Familien
+People,der Partner,partner (male),die Partner
+People,die Partnerin,partner (female),die Partnerinnen
+People,die Eltern,parents,--- (only plural)
+People,die Großeltern,grandparents,--- (only plural)
+People,der Großvater,grandfather,die Großväter
+People,die Großmutter,grandmother,die Großmütter
+People,der Opa,grandpa,die Opas
+People,die Oma,grandma,die Omas
+People,der Onkel,uncle,die Onkel
+People,die Tante,aunt,die Tanten
+People,der Cousin,cousin (male),die Cousins
+People,die Cousine,cousin (female),die Cousinen
+People,der Neffe,nephew,die Neffen
+People,die Nichte,niece,die Nichten
+People,der Gast,guest,die Gäste
+People,der Spieler,player,die Spieler
+People,der König,king,die Könige
+People,die Königin,queen,die Königinnen
+People,der Bürger,citizen,die Bürger
+People,der Experte,expert,die Experten
+Places,die Stadt,city / town,die Städte
+Places,das Land,country / countryside,die Länder
+Places,das Haus,house,die Häuser
+Places,die Wohnung,apartment / flat,die Wohnungen
+Places,der Raum,room / space,die Räume
+Places,das Zimmer,room,die Zimmer
+Places,die Küche,kitchen,die Küchen
+Places,das Bad,bathroom,die Bäder
+Places,der Garten,garden,die Gärten
+Places,die Schule,school,die Schulen
+Places,die Universität,university,die Universitäten
+Places,das Büro,office,die Büros
+Places,die Firma,company / firm,die Firmen
+Places,das Geschäft,shop / store / business,die Geschäfte
+Places,der Laden,shop,die Läden
+Places,der Supermarkt,supermarket,die Supermärkte
+Places,das Restaurant,restaurant,die Restaurants
+Places,das Hotel,hotel,die Hotels
+Places,das Krankenhaus,hospital,die Krankenhäuser
+Places,die Apotheke,pharmacy,die Apotheken
+Places,die Bank,bank (financial),die Banken
+Places,der Bahnhof,train station,die Bahnhöfe
+Places,der Flughafen,airport,die Flughäfen
+Places,die Straße,street / road,die Straßen
+Places,der Platz,place / square / plaza,die Plätze
+Places,der Park,park,die Parks
+Places,der Wald,forest / woods,die Wälder
+Places,der Berg,mountain,die Berge
+Places,der Fluss,river,die Flüsse
+Places,der See,lake,die Seen
+Places,das Meer,sea / ocean,die Meere
+Places,der Strand,beach,die Strände
+Places,die Insel,island,die Inseln
+Places,die Kirche,church,die Kirchen
+Places,das Museum,museum,die Museen
+Places,das Theater,theater,die Theater
+Places,das Kino,cinema / movie theater,die Kinos
+Places,die Bibliothek,library,die Bibliotheken
+Places,die Brücke,bridge,die Brücken
+Places,das Dorf,village,die Dörfer
+Places,die Grenze,border,die Grenzen
+Places,die Welt,world,die Welten
+Places,der Ort,place / location,die Orte
+Places,die Region,region,die Regionen
+Places,die Hauptstadt,capital city,die Hauptstädte
+Places,die Post,post office / mail,die Posten
+Places,die Tankstelle,gas station,die Tankstellen
+Places,die Bäckerei,bakery,die Bäckereien
+Places,das Café,café,die Cafés
+Places,der Markt,market,die Märkte
+Objects,das Auto,car,die Autos
+Objects,das Fahrrad,bicycle,die Fahrräder
+Objects,der Zug,train,die Züge
+Objects,der Bus,bus,die Busse
+Objects,das Flugzeug,airplane,die Flugzeuge
+Objects,das Buch,book,die Bücher
+Objects,der Stift,pen / pencil,die Stifte
+Objects,das Papier,paper,die Papiere
+Objects,der Tisch,table,die Tische
+Objects,der Stuhl,chair,die Stühle
+Objects,das Bett,bed,die Betten
+Objects,der Schrank,closet / cupboard,die Schränke
+Objects,die Tür,door,die Türen
+Objects,das Fenster,window,die Fenster
+Objects,die Wand,wall (inside),die Wände
+Objects,die Lampe,lamp,die Lampen
+Objects,das Telefon,telephone,die Telefone
+Objects,das Handy,mobile phone,die Handys
+Objects,der Computer,computer,die Computer
+Objects,der Fernseher,television set,die Fernseher
+Objects,die Uhr,clock / watch,die Uhren
+Objects,die Tasche,bag / pocket,die Taschen
+Objects,der Rucksack,backpack,die Rucksäcke
+Objects,der Schlüssel,key,die Schlüssel
+Objects,das Geld,money,die Gelder
+Objects,die Kleidung,clothing,---
+Objects,das Kleid,dress,die Kleider
+Objects,die Hose,pants / trousers,die Hosen
+Objects,das Hemd,shirt,die Hemden
+Objects,die T-Shirt,T-shirt,die T-Shirts
+Objects,der Pullover,sweater / pullover,die Pullover
+Objects,die Jacke,jacke,die Jacken
+Objects,der Mantel,coat,die Mäntel
+Objects,der Schuh,shoe,die Schuhe
+Objects,die Socke,sock,die Socken
+Objects,der Hut,hat,die Hüte
+Objects,die Brille,glasses,die Brillen
+Objects,die Zeitung,newspaper,die Zeitungen
+Objects,die Zeitschrift,magazine,die Zeitschriften
+Objects,das Bild,picture / picture,die Bilder
+Objects,der Spiegel,mirror,die Spiegel
+Objects,das Spielzeug,toy,die Spielzeuge
+Objects,die Karte,card / map / ticket,die Karten
+Objects,das Ticket,ticket,die Tickets
+Objects,der Koffer,suitcase,die Koffer
+Objects,der Regenschirm,umbrella,die Regenschirme
+Objects,die Flasche,bottle,die Flaschen
+Objects,das Glas,glass,die Gläser
+Objects,der Tasse,cup,die Tassen
+Objects,der Teller,plate,die Teller
+Objects,das Messer,knife,die Messer
+Objects,die Gabel,fork,die Gabelen
+Objects,der Löffel,spoon,die Löffel
+Objects,der Topf,pot / pan,die Töpfe
+Objects,die Pfanne,frying pan,die Pfannen
+Objects,die Decke,blanket / ceiling,die Decken
+Objects,das Kissen,pillow,die Kissen
+Objects,das Handtuch,towel,die Handtücher
+Objects,die Seife,soap,die Seifen
+Objects,die Bürste,brush,die Bürsten
+Body,der Körper,body,die Körper
+Body,der Kopf,head,die Köpfe
+Body,das Haar,hair,die Haare
+Body,das Gesicht,face,die Gesichter
+Body,das Auge,eye,die Augen
+Body,das Ohr,ear,die Ohren
+Body,die Nase,nose,die Nasen
+Body,der Mund,mouth,die Münder
+Body,der Zahn,tooth,die Zähne
+Body,der Hals,neck / throat,die Hälse
+Body,die Schulter,shoulder,die Schultern
+Body,der Arm,arm,die Ärme
+Body,die Hand,hand,die Hände
+Body,der Finger,finger,die Finger
+Body,die Brust,chest / breast,die Brüste
+Body,der Bauch,belly / stomach,die Bäuche
+Body,der Rücken,back,die Rücken
+Body,das Bein,leg,die Beine
+Body,der Fuß,foot,die Füße
+Body,das Knie,knee,die Knie
+Body,das Herz,heart,die Herzen
+Body,die Haut,skin,die Häute
+Body,das Blut,blood,---
+Body,der Knochen,bone,die Knochen
+Body,der Fußzeh,toe,die Fußzehen
+Time & Nature,die Zeit,time,die Zeiten
+Time & Nature,das Jahr,year,die Jahre
+Time & Nature,der Monat,month,die Monate
+Time & Nature,die Woche,week,die Wochen
+Time & Nature,der Tag,day,die Tage
+Time & Nature,die Stunde,hour,die Stunden
+Time & Nature,die Minute,minute,die Minuten
+Time & Nature,die Sekunde,second,die Sekunden
+Time & Nature,der Morgen,morning,die Morgen
+Time & Nature,der Mittag,noon / midday,die Mittage
+Time & Nature,der Abend,evening,die Abende
+Time & Nature,die Nacht,night,die Nächte
+Time & Nature,das Datum,date,die Daten
+Time & Nature,der Frühling,spring,die Frühlinge
+Time & Nature,der Sommer,summer,die Sommer
+Time & Nature,der Herbst,autumn / fall,die Herbste
+Time & Nature,der Winter,winter,die Winter
+Time & Nature,die Natur,nature,---
+Time & Nature,die Sonne,sun,die Sonnen
+Time & Nature,der Mond,moon,die Monde
+Time & Nature,der Stern,star,die Sterne
+Time & Nature,der Himmel,sky / heaven,die Himmel
+Time & Nature,die Erde,earth / ground,die Erden
+Time & Nature,das Wetter,weather,---
+Time & Nature,der Regen,rain,---
+Time & Nature,der Schnee,snow,---
+Time & Nature,der Wind,wind,die Winde
+Time & Nature,die Luft,air,die Lüfte
+Time & Nature,das Feuer,fire,die Feuer
+Time & Nature,das Wasser,water,die Wässer
+Time & Nature,der Baum,tree,die Bäume
+Time & Nature,die Blume,flower,die Blumen
+Time & Nature,die Pflanze,plant,die Pflanzen
+Time & Nature,das Gras,grass,die Gräser
+Time & Nature,das Blatt,leaf / paper sheet,die Blätter
+Time & Nature,der Stein,stone,die Steine
+Time & Nature,der Sand,sand,---
+Time & Nature,die Wolke,cloud,die Wolken
+Time & Nature,das Licht,light,die Lichter
+Time & Nature,der Schatten,shadow / shade,die Schatten
+Animals,das Tier,animal,die Tiere
+Animals,der Hund,dog,die Hunde
+Animals,die Katze,cat,die Katzen
+Animals,das Pferd,horse,die Pferde
+Animals,der Vogel,bird,die Vögel
+Animals,der Fisch,fish,die Fische
+Animals,die Maus,mouse,die Mäuse
+Animals,der Elefant,elephant,die Elefanten
+Animals,der Löwe,lion,die Löwen
+Animals,der Bär,bear,die Bären
+Animals,der Affe,monkey,die Affen
+Animals,der Fuchs,fox,die Füchse
+Animals,der Wolf,wolf,die Wölfe
+Animals,das Schaf,sheep,die Schafe
+Animals,die Kuh,cow,die Kühe
+Animals,das Schwein,pig,die Schweine
+Animals,das Huhn,chicken,die Hühner
+Animals,die Ente,duck,die Enten
+Animals,die Biene,bee,die Bienen
+Animals,die Spinne,spider,die Spinnen
+Animals,die Mücke,mosquito,die Mücken
+Animals,der Schmetterling,butterfly,die Schmetterlinge
+Animals,die Schlange,snake,die Schlangen
+Animals,der Frosch,frog,die Frösche
+Animals,das Kaninchen,rabbit,die Kaninchen
+Food & Drink,das Essen,food / meal,die Essen
+Food & Drink,das Trinken,drink,---
+Food & Drink,das Brot,bread,die Brote
+Food & Drink,das Brötchen,bread roll,die Brötchen
+Food & Drink,die Butter,butter,---
+der Käse,der Käse,cheese,die Käse
+Food & Drink,die Milch,milk,---
+Food & Drink,das Ei,egg,die Eier
+Food & Drink,das Fleisch,meat,---
+Food & Drink,der Fisch,fish (food),die Fische
+Food & Drink,das Hähnchen,chicken meat,die Hähnchen
+Food & Drink,die Wurst,sausage,die Würste
+Food & Drink,das Gemüse,vegetables,---
+Food & Drink,das Obst,fruit,---
+Food & Drink,der Apfel,apple,die Äpfel
+Food & Drink,die Banane,banana,die Bananen
+Food & Drink,die Orange,orange,die Orangen
+Food & Drink,die Kartoffel,potato,die Kartoffeln
+Food & Drink,die Tomate,tomato,die Tomaten
+Food & Drink,der Salat,salad / lettuce,die Salate
+Food & Drink,die Suppe,soup,die Suppen
+Food & Drink,die Soße,sauce,die Soßen
+Food & Drink,der Reis,rice,---
+Food & Drink,die Nudel,noodle / pasta,die Nudeln
+Food & Drink,der Zucker,sugar,---
+Food & Drink,das Salz,salt,die Salze
+Food & Drink,der Pfeffer,pepper,---
+Food & Drink,das Öl,oil,die Öle
+Food & Drink,der Essig,vinegar,die Essige
+Food & Drink,der Kuchen,cake,die Kuchen
+Food & Drink,die Schokolade,chocolate,die Schokoladen
+Food & Drink,das Eis,ice / ice cream,---
+Food & Drink,der Kaffee,coffee,die Kaffees
+Food & Drink,der Tee,tea,die Tees
+Food & Drink,der Saft,juice,die Säfte
+Food & Drink,das Bier,beer,die Biere
+Food & Drink,der Wein,wine,die Weine
+Food & Drink,die Nuss,nut,die Nüsse
+Food & Drink,der Honig,honey,---
+Food & Drink,die Marmelade,jam / marmalade,die Marmeladen
+Abstract & Daily Life,das Leben,life,die Leben
+Abstract & Daily Life,der Tod,death,die Tode
+Abstract & Daily Life,die Liebe,love,---
+Abstract & Daily Life,das Glück,luck / happiness,---
+Abstract & Daily Life,die Freude,joy / pleasure,die Freuden
+Abstract & Daily Life,die Angst,fear / anxiety,die Ängste
+Abstract & Daily Life,der Traum,dream,die Träume
+Abstract & Daily Life,der Gedanke,thought,die Gedanken
+Abstract & Daily Life,die Idee,idea,die Ideen
+Abstract & Daily Life,das Problem,problem,die Probleme
+Abstract & Daily Life,die Lösung,solution,die Lösungen
+Abstract & Daily Life,die Frage,question,die Fragen
+Abstract & Daily Life,die Antwort,answer,die Antworten
+Abstract & Daily Life,das Wort,word,die Wörter / Worte
+Abstract & Daily Life,die Sprache,language,die Sprachen
+Abstract & Daily Life,die Arbeit,work / job,die Arbeiten
+Abstract & Daily Life,der Beruf,profession / occupation,die Berufe
+Abstract & Daily Life,das Hobby,hobby,die Hobbys
+Abstract & Daily Life,der Sport,sport,die Sportarten
+Abstract & Daily Life,die Musik,music,---
+Abstract & Daily Life,der Film,movie / film,die Filme
+Abstract & Daily Life,das Lied,song,die Lieder
+Abstract & Daily Life,die Kunst,art,die Künste
+Abstract & Daily Life,die Geschichte,history / story,die Geschichten
+Abstract & Daily Life,die Kultur,culture,die Kulturen
+Abstract & Daily Life,die Politik,politics,---
+Abstract & Daily Life,die Wirtschaft,economy,die Wirtschaften
+Abstract & Daily Life,das Recht,law / right,die Rechte
+Abstract & Daily Life,der Staat,state / government,die Staaten
+Abstract & Daily Life,die Gesellschaft,society,die Gesellschaften
+Abstract & Daily Life,die Information,information,die Informationen
+Abstract & Daily Life,die Nachricht,news / message,die Nachrichten
+Abstract & Daily Life,der Brief,letter,die Briefe
+Abstract & Daily Life,die E-Mail,e-mail,die E-Mails
+Abstract & Daily Life,das Gespräch,conversation,die Gespräche
+Abstract & Daily Life,der Anruf,phone call,die Anrufe
+Abstract & Daily Life,die Meinung,opinion,die Meinungen
+Abstract & Daily Life,der Grund,reason / ground,die Gründe
+Abstract & Daily Life,die Ursache,cause / reason,die Ursachen
+Abstract & Daily Life,die Folge,consequence / episode,die Folgen
+Abstract & Daily Life,der Teil,part / section,die Teile
+Abstract & Daily Life,das Ganze,whole,---
+Abstract & Daily Life,das System,system,die Systeme
+Abstract & Daily Life,die Methode,method,die Methoden
+Abstract & Daily Life,die Form,form / shape,die Formen
+Abstract & Daily Life,die Art,kind / type / manner,die Arten
+Abstract & Daily Life,die Weise,way / manner,die Weisen
+Abstract & Daily Life,der Fall,case / instance,die Fälle
+Abstract & Daily Life,die Situation,situation,die Situationen
+Abstract & Daily Life,der Zustand,condition / state,die Zustände
+Abstract & Daily Life,der Unterschied,difference,die Unterschiede
+Abstract & Daily Life,der Vergleich,comparison,die Vergleiche
+Abstract & Daily Life,das Beispiel,example,die Beispiele
+Abstract & Daily Life,die Regel,rule,die Regeln
+Abstract & Daily Life,die Ausnahme,exception,die Ausnahmen
+Abstract & Daily Life,die Pflicht,duty / obligation,die Pflichten
+Abstract & Daily Life,die Freiheit,freedom,die Freiheiten
+Abstract & Daily Life,die Sicherheit,safety / security,die Sicherheiten
+Abstract & Daily Life,die Gefahr,danger,die Gefahren
+Abstract & Daily Life,der Unfall,accident,die Unfälle
+Abstract & Daily Life,der Erfolg,success,die Erfolge
+Abstract & Daily Life,der Fehler,mistake / error,die Fehler
+Abstract & Daily Life,der Versuch,attempt / try,die Versuche
+Abstract & Daily Life,die Erfahrung,experience,die Erfahrungen
+Abstract & Daily Life,das Wissen,knowledge,---
+Abstract & Daily Life,die Wissenschaft,science,die Wissenschaften
+Abstract & Daily Life,die Bildung,education,---
+Abstract & Daily Life,der Unterricht,lessons / teaching,---
+Abstract & Daily Life,die Prüfung,exam / test,die Prüfungen
+Abstract & Daily Life,das Ergebnis,result,die Ergebnisse
+Abstract & Daily Life,der Preis,price / award,die Preise
+Abstract & Daily Life,die Kosten,costs,--- (only plural)
+Abstract & Daily Life,der Wert,value / worth,die Werte
+Abstract & Daily Life,der Besitz,possession / property,---
+Abstract & Daily Life,das Eigentum,property,die Eigentümer
+Abstract & Daily Life,der Vertrag,contract / treaty,die Verträge
+Abstract & Daily Life,der Termin,appointment / date,die Termine
+Abstract & Daily Life,die Veranstaltung,event,die Veranstaltungen
+Abstract & Daily Life,das Fest,celebration / festival,die Feste
+Abstract & Daily Life,die Feier,party / celebration,die Feiern
+Abstract & Daily Life,der Urlaub,vacation / holiday,die Urlaube
+Abstract & Daily Life,die Reise,journey / trip,die Reisen
+Abstract & Daily Life,der Ausflug,excursion / trip,die Ausflüge
+Abstract & Daily Life,der Verkehr,traffic,---
+Abstract & Daily Life,der Stau,traffic jam,die Staus
+Abstract & Daily Life,die Richtung,direction,die Richtungen
+Abstract & Daily Life,der Weg,way / path,die Wege
+Abstract & Daily Life,die Entfernung,distance,die Entfernungen
+Abstract & Daily Life,die Nähe,proximity / nearness,---
+Abstract & Daily Life,die Zukunft,future,---
+Abstract & Daily Life,die Gegenwart,present time,---
+Abstract & Daily Life,die Vergangenheit,past,---
+Abstract & Daily Life,die Geschichte,history,die Geschichten
+Abstract & Daily Life,der Geburtstag,birthday,die Geburtstage
+Abstract & Daily Life,die Hochzeit,wedding,die Hochzeiten
+Abstract & Daily Life,der Wunsch,wish / desire,die Wünsche
+Abstract & Daily Life,die Hoffnung,hope,die Hoffnungen
+Abstract & Daily Life,der Glaube,faith / belief,---
+Abstract & Daily Life,die Wahrheit,truth,die Wahrheiten
+Abstract & Daily Life,die Lüge,lie,die Lügen
+Abstract & Daily Life,das Geheimnis,secret,die Geheimnisse
+Abstract & Daily Life,die Kraft,strength / power,die Kräfte
+Abstract & Daily Life,die Energie,energy,die Energien
+Abstract & Daily Life,die Gesundheit,health,---
+Abstract & Daily Life,die Krankheit,illness / disease,die Krankheiten
+Abstract & Daily Life,der Schmerz,pain,die Schmerzen
+Abstract & Daily Life,die Medizin,medicine,---
+Abstract & Daily Life,der Arzttermin,doctor appointment,die Arzttermine
+Abstract & Daily Life,die Kraft,force / power,die Kräfte
+Abstract & Daily Life,die Bewegung,movement,die Bewegungen
+Abstract & Daily Life,die Ruhe,quiet / calm,---
+Abstract & Daily Life,der Lärm,noise,---
+Abstract & Daily Life,die Stimme,voice,die Stimmen
+Abstract & Daily Life,der Geruch,smell,die Gerüche
+Abstract & Daily Life,der Geschmack,taste,die Geschmäcke
+Abstract & Daily Life,der Blick,view / glance,die Blicke
+Abstract & Daily Life,das Geräusch,sound / noise,die Geräusche
+Abstract & Daily Life,die Nummer,number,die Nummern
+Abstract & Daily Life,die Zahl,number / digit,die Zahlen
+Abstract & Daily Life,die Menge,amount / crowd,die Mengen
+Abstract & Daily Life,die Summe,sum / total,die Summen
+Abstract & Daily Life,das Stück,piece,die Stücke
+Abstract & Daily Life,die Gruppe,group,die Gruppen
+Abstract & Daily Life,die Reihe,row / series,die Reihen
+Abstract & Daily Life,die Liste,list,die Listen
+Abstract & Daily Life,die Seite,page / side,die Seiten
+Abstract & Daily Life,das Ende,end,die Enden
+Abstract & Daily Life,der Anfang,beginning,die Anfänge
+Abstract & Daily Life,die Mitte,middle,---
+Abstract & Daily Life,der Rand,edge / margin,die Ränder
+Abstract & Daily Life,der Hintergrund,background,die Hintergründe
+Abstract & Daily Life,der Vordergrund,foreground,---
+Abstract & Daily Life,der Raum,space,die Räume
+Abstract & Daily Life,der Platz,seat / space,die Plätze
+Abstract & Daily Life,der Boden,floor / ground,die Böden
+Abstract & Daily Life,die Decke,ceiling,die Decken
+Abstract & Daily Life,die Stufe,step / stage,die Stufen
+Abstract & Daily Life,die Treppe,stairs / staircase,die Treppen
+Abstract & Daily Life,der Aufzug,elevator / lift,die Aufzüge
+Abstract & Daily Life,der Ausgang,exit,die Ausgänge
+Abstract & Daily Life,der Eingang,entrance,die Eingänge
+Abstract & Daily Life,der Notausgang,emergency exit,die Notausgänge
+Abstract & Daily Life,die Erlaubnis,permission,die Erlaubnisse
+Abstract & Daily Life,das Verbot,prohibition / ban,die Verbote
+Abstract & Daily Life,die Strafe,punishment / fine,die Strafen
+Abstract & Daily Life,das Gericht,court / dish,die Gerichte
+Abstract & Daily Life,der Anwalt,lawyer,die Anwälte
+Abstract & Daily Life,die Polizei,police,---
+Abstract & Daily Life,der Polizist,police officer,die Polizisten
+Abstract & Daily Life,der Dieb,thief,die Diebe
+Abstract & Daily Life,der Einbruch,burglary,die Einbrüche
+Abstract & Daily Life,der Krieg,war,die Kriege
+Abstract & Daily Life,der Frieden,peace,---
+Abstract & Daily Life,der Vertrag,contract,die Verträge
+Abstract & Daily Life,das Bündnis,alliance,die Bündnisse
+Abstract & Daily Life,die Steuer,tax,die Steuern
+Abstract & Daily Life,die Gebühr,fee,die Gebühren
+Abstract & Daily Life,die Quittung,receipt,die Quittungen
+Abstract & Daily Life,die Rechnung,invoice / bill,die Rechnungen
+Abstract & Daily Life,das Konto,bank account,die Konten
+Abstract & Daily Life,die Karte,credit card / map,die Karten
+Abstract & Daily Life,das Bargeld,cash,---
+Abstract & Daily Life,der Automat,vending machine / ATM,die Automaten
+Abstract & Daily Life,der Zins,interest (financial),die Zinsen
+Abstract & Daily Life,der Kredit,loan / credit,die Kredite
+Abstract & Daily Life,die Schulden,debts,--- (only plural)
+Abstract & Daily Life,der Gewinn,profit / gain,die Gewinne
+Abstract & Daily Life,der Verlust,loss,die Verluste
+Abstract & Daily Life,die Aktie,share / stock,die Aktien
+Abstract & Daily Life,die Messe,trade fair / mass,die Messen
+Abstract & Daily Life,der Markt,market,die Märkte

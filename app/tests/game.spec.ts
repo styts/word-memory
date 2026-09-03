@@ -146,4 +146,32 @@ test.describe('Word Memory Game', () => {
     expect(historyParsed.length).toBe(1);
     expect(typeof historyParsed[0].percent).toBe('number');
   });
+
+  test('should support selecting Deutsch language and render articles with low opacity', async ({ page }) => {
+    // 1. Open settings modal
+    await page.locator('.settings-btn').click();
+    await expect(page.locator('.settings-card')).toBeVisible();
+    
+    // Select Deutsch
+    await page.locator('#language').selectOption('de');
+    await page.locator('#memorizeSeconds').fill('1');
+    await page.locator('#delaySeconds').fill('1');
+    await page.locator('.save-btn').click();
+
+    // 2. Start game
+    await page.locator('.play-btn').click();
+
+    // 3. Verify German words during memorize state have .word-article elements rendered
+    const memorizeWords = page.locator('.memorize-word');
+    await expect(memorizeWords).toHaveCount(4);
+    
+    const articles = page.locator('.word-article');
+    const articleCount = await articles.count();
+    expect(articleCount).toBeGreaterThan(0);
+
+    // Verify opacity style on .word-article element
+    const firstArticle = articles.first();
+    const opacity = await firstArticle.evaluate((el) => window.getComputedStyle(el).opacity);
+    expect(parseFloat(opacity)).toBeCloseTo(0.55, 1);
+  });
 });

@@ -77,6 +77,17 @@
         </div>
       </div>
 
+      <div class="setting-group">
+        <label for="language">Language</label>
+        <div class="setting-input-wrap">
+          <select id="language" v-model="language" class="setting-select">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+          </select>
+        </div>
+      </div>
+
       <div class="actions">
         <button class="save-btn" @click="$emit('close')">Save & Close</button>
       </div>
@@ -89,7 +100,7 @@ import { useGameSettings } from '../composables/useGameSettings'
 
 defineEmits(['close'])
 
-const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language } = useGameSettings()
 
 function onDelaySecondsChange() {
   if (delaySeconds.value < 0) delaySeconds.value = 0
@@ -162,16 +173,19 @@ function onTotalWordsChange() {
   gap: 0.5rem;
 }
 
-.setting-input-wrap input {
+.setting-input-wrap input,
+.setting-select {
   flex: 1;
   padding: 0.6rem 0.8rem;
   font-size: 1.1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
+  background-color: white;
 }
 
-.setting-input-wrap input:focus {
+.setting-input-wrap input:focus,
+.setting-select:focus {
   border-color: #4b9a76;
 }
 
