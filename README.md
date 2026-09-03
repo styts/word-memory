@@ -16,8 +16,10 @@ A minimal, sleek **Nuxt 4** web application designed to test and train your word
 ## ⚙️ Settings
 
 Click the gear icon (⚙️) in the top-right corner to customize:
-- **Memorize Duration**: Adjust the timer length (seconds).
+- **Memorize Duration**: Adjust the timer length for memorizing words (seconds).
+- **Delay Duration**: Set a delay step before grid selection (default: 3 seconds) to clear visual memory.
 - **Words to Memorize**: Adjust the number of target words.
+- **Total Grid Words**: Adjust the total number of words in the play grid.
 
 ## 🚀 Setup & Running Locally
 
@@ -50,3 +52,11 @@ Recorded test execution videos are available in [videos.md](videos.md).
 - **Vue 3** (Composition API)
 - **Playwright** (End-to-end Testing)
 - Vanilla CSS
+
+## TODO
+
+- [x] before the gameState === 'play', add a small page with step countdown (1, 2, 3 seconds delay centered) to transition from visual memory to mental recall, with configurable Settings value (default 3 seconds).
+- [ ] add a 🎉 (use it not as emoji, but you can find these in many other apps), when the user gets 'you won'.
+- [ ] add another Setting parameter, default 15 seconds, where in the lowest side of the playing state, a progressor comes by.
+- [ ] add link in GitHub
+- [ ] add a EChart line-smooth which shows the last 10 plays (y is percent of correct)

@@ -19,10 +19,10 @@ if (fs.existsSync(videosDir)) {
         } else if (cleanName.includes('settings')) {
           cleanName = 'game_settings';
         }
-        
+
         const webmPath = path.join(videosDir, `${cleanName}.webm`);
         const gifPath = path.join(videosDir, `${cleanName}.gif`);
-        
+
         fs.copyFileSync(videoFile, webmPath);
         console.log(`Copied ${videoFile} -> ${webmPath}`);
 

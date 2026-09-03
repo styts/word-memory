@@ -47,7 +47,7 @@ test.describe('Word Memory Game', () => {
     // 4. Verify transition to delay step
     const delayContainer = page.locator('.delay-container');
     await expect(delayContainer).toBeVisible({ timeout: 5000 });
-    await expect(page.locator('.delay-step-badge')).toContainText('Step 1 / 1');
+    await expect(page.locator('.delay-number')).toHaveText('1');
 
     // 5. Wait for transition to 'play' state (play grid visible)
     const playGrid = page.locator('.play-grid');
