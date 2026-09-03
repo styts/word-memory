@@ -65,6 +65,28 @@
       </div>
     </div>
 
+    <div v-if="gameState === 'play' && (playSeconds ?? 15) > 0" class="progressor-container">
+      <div class="progressor-track">
+        <div 
+          class="progressor-fill" 
+          :style="{ width: `${playProgressPercent}%` }"
+        ></div>
+      </div>
+    </div>
+
+    <a 
+      v-if="gameState === 'start'" 
+      href="https://github.com/styts/word-memory" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="github-link"
+      title="View source on GitHub"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+      </svg>
+    </a>
+
     <Settings v-if="showSettings" @close="onCloseSettings" />
   </div>
 </template>
@@ -77,7 +99,7 @@ import Settings from './components/Settings.vue'
 
 import wordPool from './words.json'
 
-const { memorizeSeconds, delaySeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords } = useGameSettings()
 const showSettings = ref(false)
 
 const gameState = ref('start')
@@ -87,7 +109,17 @@ const clickedWords = ref(new Set())
 const score = ref(0)
 const resultMessage = ref('')
 const timerValue = ref(memorizeSeconds.value || 5)
+const playTimeRemaining = ref(0)
+const playProgressPercent = ref(100)
 let countdownInterval = null
+let playInterval = null
+
+function clearPlayTimer() {
+  if (playInterval) {
+    clearInterval(playInterval)
+    playInterval = null
+  }
+}
 
 function shuffle(array) {
   const arr = [...array]
@@ -111,8 +143,11 @@ function prepareGame() {
   score.value = 0
   gameState.value = 'start'
   timerValue.value = memorizeSeconds.value || 5
+  playTimeRemaining.value = playSeconds.value || 15
+  playProgressPercent.value = 100
   
   if (countdownInterval) clearInterval(countdownInterval)
+  clearPlayTimer()
 }
 
 function resetAndPlay() {
@@ -145,11 +180,38 @@ function startDelayPhase() {
       timerValue.value--
       if (timerValue.value <= 0) {
         clearInterval(countdownInterval)
-        gameState.value = 'play'
+        startPlayPhase()
       }
     }, 1000)
   } else {
-    gameState.value = 'play'
+    startPlayPhase()
+  }
+}
+
+function startPlayPhase() {
+  gameState.value = 'play'
+  clearPlayTimer()
+
+  const pSec = playSeconds.value ?? 15
+  if (pSec > 0) {
+    playTimeRemaining.value = pSec
+    playProgressPercent.value = 100
+
+    const intervalMs = 50
+    const totalDurationMs = pSec * 1000
+    let elapsedMs = 0
+
+    playInterval = setInterval(() => {
+      elapsedMs += intervalMs
+      const remainingMs = Math.max(0, totalDurationMs - elapsedMs)
+      playTimeRemaining.value = remainingMs / 1000
+      playProgressPercent.value = (remainingMs / totalDurationMs) * 100
+
+      if (remainingMs <= 0) {
+        clearPlayTimer()
+        endGame(score.value === (targetWordsCount.value || 4))
+      }
+    }, intervalMs)
   }
 }
 
@@ -179,6 +241,7 @@ function triggerWinConfetti() {
 }
 
 function endGame(win) {
+  clearPlayTimer()
   gameState.value = 'end'
   resultMessage.value = win ? 'You won!' : 'You lost!'
   if (win) {
@@ -209,6 +272,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (countdownInterval) clearInterval(countdownInterval)
+  clearPlayTimer()
 })
 </script>
 
@@ -492,5 +556,64 @@ body {
 }
 .try-again-btn:active {
   transform: scale(0.98);
+}
+
+.progressor-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 600px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+}
+
+.progressor-track {
+  width: 100%;
+  height: 12px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.progressor-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5bc08a, #7ae7b1);
+  border-radius: 999px;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 10px rgba(91, 192, 138, 0.6);
+}
+
+.github-link {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+  text-decoration: none;
+}
+
+.github-link:hover {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.15);
+}
+
+.github-link svg {
+  width: 32px;
+  height: 32px;
 }
 </style>

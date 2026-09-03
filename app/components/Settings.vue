@@ -33,6 +33,21 @@
       </div>
 
       <div class="setting-group">
+        <label for="playSeconds">Play Duration (seconds)</label>
+        <div class="setting-input-wrap">
+          <input 
+            id="playSeconds" 
+            type="number" 
+            min="0" 
+            max="120" 
+            v-model.number="playSeconds"
+            @change="onPlaySecondsChange"
+          />
+          <span class="unit">sec</span>
+        </div>
+      </div>
+
+      <div class="setting-group">
         <label for="targetWordsCount">Words to Memorize</label>
         <div class="setting-input-wrap">
           <input 
@@ -74,10 +89,14 @@ import { useGameSettings } from '../composables/useGameSettings'
 
 defineEmits(['close'])
 
-const { memorizeSeconds, delaySeconds, targetWordsCount, totalGridWords } = useGameSettings()
+const { memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords } = useGameSettings()
 
 function onDelaySecondsChange() {
   if (delaySeconds.value < 0) delaySeconds.value = 0
+}
+
+function onPlaySecondsChange() {
+  if (playSeconds.value < 0) playSeconds.value = 0
 }
 
 function onTargetWordsChange() {

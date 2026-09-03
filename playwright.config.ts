@@ -20,7 +20,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'PORT=26090 NUXT_APP_BASE_URL=/ pnpm run dev',
+    command: 'PORT=26090 node .output/server/index.mjs',
     url: 'http://localhost:26090',
     reuseExistingServer: false,
     timeout: 120 * 1000,

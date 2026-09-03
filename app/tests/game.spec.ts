@@ -22,6 +22,11 @@ test.describe('Word Memory Game', () => {
     const playBtn = page.locator('.play-btn');
     await expect(playBtn).toBeVisible();
     await expect(playBtn).toHaveText('PLAY');
+
+    // Check GitHub link
+    const githubLink = page.locator('.github-link');
+    await expect(githubLink).toBeVisible();
+    await expect(githubLink).toHaveAttribute('href', 'https://github.com/styts/word-memory');
   });
 
   test('should complete full game lifecycle with delay step from start to end screen', async ({ page }) => {
@@ -52,6 +57,7 @@ test.describe('Word Memory Game', () => {
     // 5. Wait for transition to 'play' state (play grid visible)
     const playGrid = page.locator('.play-grid');
     await expect(playGrid).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('.progressor-container')).toBeVisible();
 
     const playWords = page.locator('.play-word');
     await expect(playWords).toHaveCount(12);
@@ -71,7 +77,7 @@ test.describe('Word Memory Game', () => {
     await expect(page.locator('.status-banner')).toHaveText('Memorize the words below');
   });
 
-  test('should open adjust and save game settings including delay', async ({ page }) => {
+  test('should open adjust and save game settings including delay and play duration', async ({ page }) => {
     // Open settings modal
     await page.locator('.settings-btn').click();
     await expect(page.locator('.settings-card h2')).toHaveText('Game Settings');
@@ -79,6 +85,7 @@ test.describe('Word Memory Game', () => {
     // Change settings
     await page.locator('#memorizeSeconds').fill('3');
     await page.locator('#delaySeconds').fill('4');
+    await page.locator('#playSeconds').fill('20');
     await page.locator('#targetWordsCount').fill('5');
     await page.locator('#totalGridWords').fill('15');
 
@@ -94,6 +101,7 @@ test.describe('Word Memory Game', () => {
     const parsed = JSON.parse(storedSettings!);
     expect(parsed.memorizeSeconds).toBe(3);
     expect(parsed.delaySeconds).toBe(4);
+    expect(parsed.playSeconds).toBe(20);
     expect(parsed.targetWordsCount).toBe(5);
     expect(parsed.totalGridWords).toBe(15);
   });
