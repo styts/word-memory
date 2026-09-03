@@ -14,25 +14,31 @@ export const usePlayHistory = () => {
   const history = useState<PlayRecord[]>('playHistory', () => [])
 
   if (import.meta.client) {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved) {
         const parsed = JSON.parse(saved)
         if (Array.isArray(parsed)) {
           history.value = parsed
         }
-      } catch (e) {
-        console.error('Failed to load play history from localStorage:', e)
       }
+    } catch (e) {
+      console.warn('Failed to read play history from localStorage:', e)
     }
 
-    watch(
-      history,
-      (newHistory) => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newHistory))
-      },
-      { deep: true }
-    )
+    try {
+      watch(
+        history,
+        (newHistory) => {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(newHistory))
+          } catch (e) {
+            console.warn('Failed to save play history to localStorage:', e)
+          }
+        },
+        { deep: true }
+      )
+    } catch (e) {}
   }
 
   function addPlayRecord(score: number, targetCount: number) {

@@ -1,7 +1,7 @@
 <template>
   <div class="game-container">
     <div class="header">
-      <div class="timer">
+      <div v-if="gameState === 'memorize'" class="timer">
         <span class="digit">0</span>
         <span class="digit">0</span>
         <span class="colon">:</span>
@@ -68,7 +68,9 @@
         </button>
       </div>
 
-      <Chart v-if="gameState === 'start' || gameState === 'end'" />
+      <ClientOnly>
+        <Chart v-if="gameState === 'start' || gameState === 'end'" />
+      </ClientOnly>
     </div>
 
     <div v-if="gameState === 'play' && (playSeconds ?? 15) > 0" class="progressor-container">
@@ -81,7 +83,7 @@
     </div>
 
     <a 
-      v-if="gameState === 'start' || gameState === 'end'" 
+      v-if="gameState === 'start'"
       href="https://github.com/styts/word-memory" 
       target="_blank" 
       rel="noopener noreferrer" 
@@ -389,6 +391,7 @@ body {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   transition: transform 0.1s;
+  margin-left: auto;
 }
 .settings-btn:active {
   transform: scale(0.95);
@@ -418,11 +421,11 @@ body {
 }
 
 .bottom-slot {
-  min-height: 75px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0;
   width: 100%;
 }
 

@@ -144,13 +144,14 @@ const points = computed(() => {
       ? svgConfig.paddingLeft + plotWidth / 2
       : svgConfig.paddingLeft + (i / (count - 1)) * plotWidth
       
-    const y = svgConfig.paddingTop + (1 - item.percent / 100) * plotHeight
+    const safePercent = typeof item?.percent === 'number' && Number.isFinite(item.percent) ? Math.min(100, Math.max(0, item.percent)) : 0
+    const y = svgConfig.paddingTop + (1 - safePercent / 100) * plotHeight
     
     return {
       id: item.id || i,
       x,
       y,
-      percent: item.percent,
+      percent: safePercent,
       score: item.score,
       targetCount: item.targetCount
     }
@@ -199,7 +200,7 @@ function getTooltipX(x) {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   width: 100%;
   box-sizing: border-box;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 @media (min-width: 600px) {

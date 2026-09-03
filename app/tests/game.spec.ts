@@ -7,7 +7,7 @@ test.describe('Word Memory Game', () => {
 
   test('should display initial start screen correctly', async ({ page }) => {
     // Check title and header elements
-    await expect(page.locator('.timer')).toBeVisible();
+    await expect(page.locator('.timer')).toHaveCount(0);
     await expect(page.locator('.settings-btn')).toBeVisible();
     await expect(page.locator('.status-banner')).toHaveText('Memorize the words below');
 

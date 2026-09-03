@@ -11,9 +11,9 @@ export const useGameSettings = () => {
   const language = useState<string>('language', () => 'en')
 
   if (import.meta.client) {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved) {
         const parsed = JSON.parse(saved)
         if (typeof parsed.memorizeSeconds === 'number') memorizeSeconds.value = parsed.memorizeSeconds
         if (typeof parsed.delaySeconds === 'number') delaySeconds.value = parsed.delaySeconds
@@ -21,28 +21,34 @@ export const useGameSettings = () => {
         if (typeof parsed.targetWordsCount === 'number') targetWordsCount.value = parsed.targetWordsCount
         if (typeof parsed.totalGridWords === 'number') totalGridWords.value = parsed.totalGridWords
         if (typeof parsed.language === 'string') language.value = parsed.language
-      } catch (e) {
-        console.error('Failed to load settings from localStorage:', e)
       }
+    } catch (e) {
+      console.warn('Failed to read settings from localStorage:', e)
     }
 
-    watch(
-      [memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language],
-      () => {
-        localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify({
-            memorizeSeconds: memorizeSeconds.value,
-            delaySeconds: delaySeconds.value,
-            playSeconds: playSeconds.value,
-            targetWordsCount: targetWordsCount.value,
-            totalGridWords: totalGridWords.value,
-            language: language.value
-          })
-        )
-      },
-      { deep: true }
-    )
+    try {
+      watch(
+        [memorizeSeconds, delaySeconds, playSeconds, targetWordsCount, totalGridWords, language],
+        () => {
+          try {
+            localStorage.setItem(
+              STORAGE_KEY,
+              JSON.stringify({
+                memorizeSeconds: memorizeSeconds.value,
+                delaySeconds: delaySeconds.value,
+                playSeconds: playSeconds.value,
+                targetWordsCount: targetWordsCount.value,
+                totalGridWords: totalGridWords.value,
+                language: language.value
+              })
+            )
+          } catch (e) {
+            console.warn('Failed to save settings to localStorage:', e)
+          }
+        },
+        { deep: true }
+      )
+    } catch (e) {}
   }
 
   return {
