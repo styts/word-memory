@@ -14,7 +14,7 @@
     </div>
 
     <div v-if="last10.length === 0" class="empty-chart">
-      <p>No games played yet. Finish a round to see your accuracy trend!</p>
+      <p>No games played yet.</p>
     </div>
 
     <div v-else class="chart-wrapper">
